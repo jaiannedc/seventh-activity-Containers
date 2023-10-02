@@ -18,7 +18,7 @@ jobs:
       MUNGO_CLUSTER_ADDRESS: mongodb
       MUNGODB_USERNAME: root
       MUNGODB_PASSWORD: password
-      PORT: 1234
+      PORT: 8080
     services:
       mongodb:
         image: mongo
