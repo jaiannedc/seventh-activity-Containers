@@ -6,24 +6,22 @@ on:
       - dev
 env:
   CACHE_KEY: node-deps
-  DATABASE_NAME: demo_db
+  MONGODB_DB_NAME: demo_db
 jobs:
   test:
     environment: testing
     runs-on: ubuntu-latest
-    #container:
-    #  image: node:16
+    container:
+      image: node:16
     env:
       MONGODB_CONNECTION_PROTOCOL: mongodb
-      MUNGO_CLUSTER_ADDRESS: 127.0.0.1:27017
-      MUNGODB_USERNAME: root
-      MUNGODB_PASSWORD: password
+      MONGO_CLUSTER_ADDRESS: mongodb
+      MONGODB_USERNAME: root
+      MONGODB_PASSWORD: password
       PORT: 8080
     services:
       mongodb:
         image: mongo
-        ports:
-          - 27017:27017
         env:
           MONGO_INITDB_ROOT_USERNAME: root
           MONGO_INITDB_ROOT_PASSWORD: password
@@ -43,7 +41,7 @@ jobs:
         run: npm test
       - name: Output information
         run: |
-          echo "MUNGODB_USERNAME: $MUNGODB_USERNAME"
+          echo "MONGODB_USERNAME: $MONGODB_USERNAME"
   deploy:
     needs: test
     runs-on: ubuntu-latest
@@ -53,5 +51,5 @@ jobs:
           PORT: 3000
         run: |        
           echo "DATABASE_NAME: $DATABASE_NAME"
-          echo "MUNGODB_USERNAME: $MUNGODB_USERNAME"
+          echo "MONGODB_USERNAME: $MONGODB_USERNAME"
           echo "${{ env.PORT }}"
