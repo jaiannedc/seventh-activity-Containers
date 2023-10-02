@@ -14,11 +14,17 @@ jobs:
     container:
       image: node:16
     env:
-      MONGODB_CONNECTION_PROTOCOL: mongodb+srv
-      MUNGO_CLUSTER_ADDRESS: test.cluster.48qwmoo.mungodb.xyz
-      MUNGODB_USERNAME: ${{ secrets.MUNGODB_USERNAME }}
-      MUNGODB_PASSWORD: ${{ secrets.MUNGODB_PASSWORD }}
+      MONGODB_CONNECTION_PROTOCOL: mongodb
+      MUNGO_CLUSTER_ADDRESS: mungodb
+      MUNGODB_USERNAME: root
+      MUNGODB_PASSWORD: password
       PORT: 1234
+    services:
+      mungodb:
+        image: mongo
+        env:
+          MONGO_INITDB_ROOT_USERNAME: root
+          MONGO_INITDB_ROOT_PASSWORD: password
     steps:
       - name: Get Code
         uses: actions/checkout@v3
