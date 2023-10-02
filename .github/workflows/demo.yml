@@ -15,12 +15,12 @@ jobs:
       image: node:16
     env:
       MONGODB_CONNECTION_PROTOCOL: mongodb
-      MUNGO_CLUSTER_ADDRESS: mungodb
+      MUNGO_CLUSTER_ADDRESS: mongodb
       MUNGODB_USERNAME: root
       MUNGODB_PASSWORD: password
       PORT: 1234
     services:
-      mungodb:
+      mongodb:
         image: mongo
         env:
           MONGO_INITDB_ROOT_USERNAME: root
